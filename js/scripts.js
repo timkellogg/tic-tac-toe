@@ -68,20 +68,24 @@ $(document).ready(function() {
   var playerTurn = player1;
   var turns = 0
 
+  $('.turn').text("Player " + playerTurn.mark + "'s Turn");
   $(".cell-value").click(function() {
     $(this).text(playerTurn.mark);
+
     var spaceId = parseInt($(this).attr('id'));
     playerTurn.move(spaceId);
     turns++;
     if (playerTurn.win() === true) {
       $('span#winner').text('Player ' + playerTurn.mark + ' wins!')
-
+      $(".result").show();
+      $('.turn').hide();
     } else if (turns === 9) {
-      $('span#winner').text('Gameover. You both suck!')
-
-
+      $('span#winner').text('Game over. You both suck!')
+      $(".result").show();
+      $('.turn').hide();
     } else {
       playerTurn = playerTurn === player1 ? player2 : player1;
+      $('.turn').text("Player " + playerTurn.mark + "'s Turn");
     };
 
     $(this).unbind("click");  //makes clicked cell unclickable

@@ -1,8 +1,30 @@
+body {
+  margin: auto;
+  font-family: 'Gloria Hallelujah', cursive;
+}
+
 .tic-tac-toe-table {
   width: 50%;
 }
 
+#board {
+  table-layout: fixed;
 
-table {
+  font-size: 3em;
+  text-align: center;
+  background-color: #B2D1E0;
 
+}
+
+#board td {
+  height: 155px;
+  width: 78px;
+  border: 8px black;
+  vertical-align: middle;
+  border: 3px solid black;
+}
+
+
+.result {
+  display: none;
 }

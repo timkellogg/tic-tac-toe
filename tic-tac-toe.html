@@ -2,6 +2,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/styles.css" type="text/css">
     <script src="js/jquery-1.11.3.js"></script>
     <script src="js/scripts.js"></script>
@@ -9,8 +10,10 @@
   </head>
   <body>
     <div class="container">
+      <center><h1>Tic Tac Toe ! ! !</h1></center>
+      <center>
       <div class="tic-tac-toe-table">
-        <table class="table table-bordered">
+        <table id="board" class="table table-bordered">
           <tr>
             <td class='cell-value' id="1"></td>
             <td class='cell-value' id="2"></td>
@@ -27,11 +30,14 @@
             <td class='cell-value' id="9"></td>
           </tr>
         </table>
+        <h2><span class="turn"></span><h2>
+
       </div>
-      <div class="result">
-        <p> Congrats!</p>
-        <span id="winner"></span>
-      </div>
+    </center>
+    <center><div class="result">
+        <h2> Congrats!</h2>
+        <h2><span id="winner"></span></h2>
+      </div></center>
     </div>
   </body>
 </html>
