@@ -15,7 +15,15 @@ describe("Player", function() {
     testPlayer1.move(4);
     testPlayer1.move(5);
     testPlayer1.move(6);
-    expect(testPlayer1.win(testPlayer1.spaces)).to.equal(true);
+    expect(testPlayer1.win()).to.equal(true);
+  });
+
+  it('checks if a player does not have a winning combination', function() {
+    var testPlayer1 = new Player("X");
+    testPlayer1.move(1);
+    testPlayer1.move(5);
+    testPlayer1.move(6);
+    expect(testPlayer1.win()).to.equal(false);
   });
 });
 
