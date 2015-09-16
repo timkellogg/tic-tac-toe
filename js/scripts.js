@@ -65,25 +65,26 @@ Player.prototype.win = function() {
 $(document).ready(function() {
   var player1 = new Player("X");
   var player2 = new Player("O");
-
   var playerTurn = player1;
+  var turns = 0
 
   $(".cell-value").click(function() {
-    // var spaceId = $(this).find('.cell-value').val();
-    // debugger;
+    $(this).text(playerTurn.mark);
     var spaceId = parseInt($(this).attr('id'));
-
     playerTurn.move(spaceId);
-    console.log(playerTurn.spaces);
-    console.log(playerTurn);
-// debugger;
-  if (playerTurn.win() === true) {
-    console.log(playerTurn.mark + " wins!");
+    turns++;
+    if (playerTurn.win() === true) {
+      $('span#winner').text('Player ' + playerTurn.mark + ' wins!')
 
-  } else {
-    playerTurn = playerTurn === player1 ? player2 : player1;
-  };
+    } else if (turns === 9) {
+      $('span#winner').text('Gameover. You both suck!')
 
+
+    } else {
+      playerTurn = playerTurn === player1 ? player2 : player1;
+    };
+
+    $(this).unbind("click");  //makes clicked cell unclickable
   });
 
 });
