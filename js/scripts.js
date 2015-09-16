@@ -35,7 +35,6 @@ Array.prototype.includes = function(searchElement /*, fromIndex*/ ) {
 function Player (mark) {
   this.mark = mark;
   this.spaces = [];
-  // this.win = false
 }
 
 Player.prototype.move = function(move) {
@@ -51,8 +50,7 @@ Player.prototype.win = function() {
   var spaces = this.spaces
   winningCombos.forEach(function(combo) {
     for (var i = 0; i <3; i++) {
-      // debugger;
-      result[i] = (spaces).includes(combo[i]);
+      result[i] = (spaces).includes(combo[i]); //gets results for each winning combination
     }
     if ((result[0] === true) && (result[1] === true) && (result[2] === true)) {
        win = true;
@@ -66,7 +64,7 @@ $(document).ready(function() {
   var player1 = new Player("X");
   var player2 = new Player("O");
   var playerTurn = player1;
-  var turns = 0
+  var turns = 0;
 
   $('.turn').text("Player " + playerTurn.mark + "'s Turn");
   $(".cell-value").click(function() {
@@ -79,13 +77,13 @@ $(document).ready(function() {
       $('span#winner').text('Player ' + playerTurn.mark + ' wins!')
       $(".result").show();
       $('.turn').hide();
-    } else if (turns === 9) {
+    } else if (turns === 9) {  //ends the game after 9 turns if there is no winner
       $('span#winner').text('Game over. You both suck!')
       $(".result").show();
       $('.turn').hide();
     } else {
       playerTurn = playerTurn === player1 ? player2 : player1;
-      $('.turn').text("Player " + playerTurn.mark + "'s Turn");
+      $('.turn').text("Player " + playerTurn.mark + "'s Turn"); //switches player turn
     };
 
     $(this).unbind("click");  //makes clicked cell unclickable
