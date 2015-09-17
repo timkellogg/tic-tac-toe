@@ -1,6 +1,3 @@
-// Used MDN array protoype so that we can have an includes method
-
-
 Array.prototype.includes = function(searchElement /*, fromIndex*/ ) {
   'use strict';
   var O = Object(this);
@@ -20,17 +17,13 @@ Array.prototype.includes = function(searchElement /*, fromIndex*/ ) {
   while (k < len) {
     currentElement = O[k];
     if (searchElement === currentElement ||
-      (searchElement !== searchElement && currentElement !== currentElement)) {
-        return true;
-      }
-      k++;
+       (searchElement !== searchElement && currentElement !== currentElement)) {
+      return true;
     }
-    return false;
-  };
-
-
-
-
+    k++;
+  }
+  return false;
+};
 
 function Player (mark) {
   this.mark = mark;
@@ -40,8 +33,6 @@ function Player (mark) {
 Player.prototype.move = function(move) {
   this.spaces.push(move);
 };
-
-// this prototype tests to see if a player has a winning combination of spaces
 
 Player.prototype.win = function() {
   var result = [];
@@ -60,6 +51,14 @@ Player.prototype.win = function() {
 };
 
 
+// reset button
+
+// end game on win
+
+// instructions modal
+
+// cats game
+
 $(document).ready(function() {
   var player1 = new Player("X");
   var player2 = new Player("O");
@@ -75,6 +74,8 @@ $(document).ready(function() {
     turns++;
     if (playerTurn.win() === true) {
       $('span#winner').text('Player ' + playerTurn.mark + ' wins!')
+      $('#msg-container').append("<button id='restart' class='btn btn-default'>Play again?</button>");
+      $('#restart').on("click", function() { location.reload(); });
       $(".result").show();
       $('.turn').hide();
     } else if (turns === 9) {  //ends the game after 9 turns if there is no winner
