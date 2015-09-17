@@ -57,3 +57,7 @@ body {
   margin: auto;
   margin-top: 50px;
 }
+
+.instructions-list li {
+  margin-bottom: 13px;
+}
