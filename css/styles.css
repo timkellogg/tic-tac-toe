@@ -22,9 +22,9 @@ body {
   border: 3px solid black;
 }
 
-/*.cell-value:hover {
-  cursor:pointer;
-}*/
+.cell-value:hover {
+  background-color: #7BB0CA;
+}
 
 .x-cursor {
   cursor: url("../public/x-cursor.png") 25 25, pointer;
