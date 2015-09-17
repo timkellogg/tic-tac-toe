@@ -79,7 +79,7 @@ $(document).ready(function() {
       playerTurn.move(spaceId);
       turns++;
       if (playerTurn.win() === true) {
-        $('span#winner').text('Player ' + playerTurn.mark + ' wins!')
+        $('span#winner').text('Congrats!' + " " + 'Player ' + playerTurn.mark + ' wins!');
         renderRestartBtn();
         renderMsgs();
         $(".cell-value").off();
