@@ -47,3 +47,7 @@ body {
 .extra-bold {
   font-weight: 100;
 }
+
+#instructions-container {
+  padding: 10px;
+}
