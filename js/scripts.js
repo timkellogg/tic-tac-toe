@@ -59,9 +59,19 @@ $(document).ready(function() {
   var playerTurn = player1;
   var turns = 0;
 
+
   function renderMsgs() {
     $(".result").show();
     $('.turn').hide();
+  }
+
+  function renderCat() {
+    $(".tic-tac-toe-table").empty();
+    $(".tic-tac-toe-table").append(
+        "<div id='cat-container'>" +
+          "<img class='img-rounded' src='public/gladiator-cat.jpg'>" +
+        "</div>"
+    ).hide().fadeIn(2000);
   }
 
   function renderRestartBtn() {
@@ -85,6 +95,7 @@ $(document).ready(function() {
         $(".cell-value").off();
       } else if (turns === 9) {
         $('span#winner').text('Game over. Fight to the DEATH (or restart)!')
+        renderCat();
         renderMsgs();
         renderRestartBtn();
       } else {
