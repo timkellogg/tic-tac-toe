@@ -55,12 +55,13 @@ $(document).ready(function() {
   var player1 = new Player("X");
   var player2 = new Player("O");
   var playerTurn = player1;
-  var player1Spaces = [];
-  var player2Spaces = [];
   var availableSpaces = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   changeCursor();
   var turns = 0;
   var computer;
+  var player1Name;
+  var player2Name;
+  var currentPlayer;
 
   $("#PVP").on("click", function() {
     $(".play-options").hide();
@@ -76,20 +77,16 @@ $(document).ready(function() {
     if (($("input#player1")).val() !== "" && ($("input#player2")).val() !== "") {
       $(".pick-name").hide();
       $(".tic-tac-toe-table").fadeIn(500);
+      player1Name = $("input#player1").val();
+      player2Name = $("input#player2").val();
+      $('.turn').text(player1Name + "'s Turn");
     } else {
       $('#noNameModal').modal('show');
     }
   });
 
-  // set the player vs player
-  $("#PVP").on("click", function() {
-    computer = false;
-  });
-
-  // set player vs computer
-  $("#PVC").on("click", function() {
-    computer = true;
-  });
+  $("#PVP").on("click", function() { computer = false; });
+  $("#PVC").on("click", function() { computer = true;  });
 
   function renderMsgs() {
     $(".result").show();
@@ -150,7 +147,7 @@ $(document).ready(function() {
     };
   }
 
-  $('.turn').text("Player " + playerTurn.mark + "'s Turn");
+
   $(".cell-value").click(function() {
     if ( $(this).text() === "" ) {
       $(this).text(playerTurn.mark);
@@ -158,10 +155,15 @@ $(document).ready(function() {
       playerTurn.move(spaceId);
       var index = availableSpaces.indexOf(spaceId);
       availableSpaces.splice(index, 1);
+      if (playerTurn.mark === "X") {
+        currentPlayer = player1Name;
+      } else {
+        currentPlayer = player2Name;
+      }
       turns++;
       changeCursor();
       if (playerTurn.win() === true) {
-        $('span#winner').text('Congrats!' + " " + 'Player ' + playerTurn.mark + ' wins!');
+        $('span#winner').text('Congrats! ' + currentPlayer + ' wins!');
         renderRestartBtn();
         renderMsgs();
         endCursor()
@@ -174,8 +176,7 @@ $(document).ready(function() {
         endCursor()
       } else {
         playerTurn = playerTurn === player1 ? player2 : player1;
-        $('.turn').text("Player " + playerTurn.mark + "'s Turn");
-        console.log(computer);
+        $('.turn').text(currentPlayer + "'s Turn");
         if (computer) computerPick();
       };
     } else {
