@@ -62,9 +62,23 @@ $(document).ready(function() {
   var turns = 0;
   var computer;
 
-  $(".option-btn").on("click", function() {
+  $("#PVP").on("click", function() {
+    $(".play-options").hide();
+    $(".pick-name").fadeIn(500);
+  });
+
+  $("#PVC").on("click", function() {
     $(".play-options").hide();
     $(".tic-tac-toe-table").fadeIn(500);
+  });
+
+  $("#player-names").on("click", function() {
+    if (($("input#player1")).val() !== "" && ($("input#player2")).val() !== "") {
+      $(".pick-name").hide();
+      $(".tic-tac-toe-table").fadeIn(500);
+    } else {
+      $('#noNameModal').modal('show');
+    }
   });
 
   // set the player vs player

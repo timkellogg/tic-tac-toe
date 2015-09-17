@@ -19,6 +19,13 @@
         <button id="PVP" class="option-btn btn btn-info btn-lg">Play against a friend!</button>
         <button id="PVC" class="option-btn btn btn-success btn-lg">Play against the computer!</button>
       </div>
+      <div class="pick-name text-center">
+        <input id="player1" type="text" class="form-control" placeholder="Enter Player One's Name!" required>
+        <br>
+        <input id="player2" type="text" class="form-control" placeholder="Enter Player Two's Name!" required>
+        <br>
+        <button id="player-names" class="name-btn btn btn-start btn-lg">Start the Game!</button>
+      </div>
       <div class="tic-tac-toe-table">
 
         <table id="board" class="table table-bordered">
@@ -79,6 +86,26 @@
                 <li>Players alternate placing Xs and Os on the game board until either opponent has three in a row or all nine squares are filled.</li>
                 <li>X always goes first, and in the event that no one has three in a row, the stalemate is called a cat game.</li>
               </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- No Name Modal -->
+      <div class="modal fade" id="noNameModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Uh oh...</h4>
+            </div>
+            <div class="modal-body">
+              <p>
+                Please enter a name for <u>both</u> players.
+              </p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

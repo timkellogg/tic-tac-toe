@@ -61,3 +61,16 @@ body {
 .instructions-list li {
   margin-bottom: 13px;
 }
+
+.btn-start {
+  color: #fff;
+  background-color: #7BB0CA;
+}
+
+.btn-start:hover {
+  background-color: #628CA1;
+}
+
+.pick-name {
+  display: none;
+}
