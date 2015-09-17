@@ -95,15 +95,31 @@ $(document).ready(function() {
     $(".tic-tac-toe-table").css("cursor", "pointer");
   }
 
-  // function computerPick() {
-  //   var selection = availableSpaces[Math.floor(Math.random()*availableSpaces.length)];
-  //   $("#" + selection).text(player2.mark);
-  //   playerTurn.move(selection);
-  //   var index = availableSpaces.indexOf(selection);
-  //   availableSpaces.splice(index, 1);
-  //   turns++;
-  //   changeCursor();
-  // }
+  function computerPick() {
+    var selection = availableSpaces[Math.floor(Math.random()*availableSpaces.length)];
+    $("#" + selection).text(playerTurn.mark);
+    playerTurn.move(selection);
+    var index = availableSpaces.indexOf(selection);
+    availableSpaces.splice(index, 1);
+    turns++;
+    changeCursor();
+    if (playerTurn.win() === true) {
+      $('span#winner').text('Congrats!' + " " + 'Player ' + playerTurn.mark + ' wins!');
+      renderRestartBtn();
+      renderMsgs();
+      endCursor()
+      $(".cell-value").off();
+    } else if (turns === 9) {
+      $('span#winner').text('Game over. Fight to the DEATH (or play again)!')
+      renderCat();
+      renderMsgs();
+      renderRestartBtn();
+      endCursor()
+    } else {
+      playerTurn = playerTurn === player1 ? player2 : player1;
+      $('.turn').text("Player " + playerTurn.mark + "'s Turn");
+    };
+  }
 
   $('.turn').text("Player " + playerTurn.mark + "'s Turn");
   $(".cell-value").click(function() {
@@ -111,8 +127,8 @@ $(document).ready(function() {
       $(this).text(playerTurn.mark);
       var spaceId = parseInt( $(this).attr('id') );
       playerTurn.move(spaceId);
-      // var index = availableSpaces.indexOf(spaceId);
-      // availableSpaces.splice(index, 1);
+      var index = availableSpaces.indexOf(spaceId);
+      availableSpaces.splice(index, 1);
       turns++;
       changeCursor();
       if (playerTurn.win() === true) {
@@ -130,8 +146,8 @@ $(document).ready(function() {
       } else {
         playerTurn = playerTurn === player1 ? player2 : player1;
         $('.turn').text("Player " + playerTurn.mark + "'s Turn");
+        computerPick();
       };
-    // computerPick();
     } else {
       $('#cheaterModal').modal('show');
     }
