@@ -35,3 +35,7 @@ body {
 .result {
   display: none;
 }
+
+.extra-bold {
+  font-weight: 100;
+}

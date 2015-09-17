@@ -11,6 +11,9 @@
   </head>
   <body>
     <div class="container">
+      <div id="instructions-container" class="row text-right">
+        <button class="btn btn-default" data-toggle="modal" data-target="#instructions-modal">View Instructions</button>
+      </div>
       <h1 class="text-center">Tic Tac Toe ! ! !</h1>
 
       <div class="tic-tac-toe-table">
@@ -38,9 +41,9 @@
         <h2> Congrats!</h2>
         <h2><span id="winner"></span></h2>
       </div>
-      <div id="msg-container" class="row"></div>
+      <div id="msg-container" class="row text-center"></div>
 
-      <!-- Modal -->
+      <!-- Cheater Modal -->
       <div class="modal fade" id="cheaterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -50,6 +53,30 @@
             </div>
             <div class="modal-body">
               Don't cheat - pick a different square...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Instructions Modal -->
+      <div class="modal fade" id="instructions-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">How to Play:</h4>
+            </div>
+            <div class="modal-body">
+              <p>The object of Tic Tac Toe is to get three in a row.
+                You play on a three by three game board. The first player is known as
+                X and the second is O. Players alternate placing Xs and Os on the
+                game board until either opponent has three in a row or all nine squares
+                are filled. X always goes first, and in the event that no one has
+                three in a row, the stalemate is called a cat game.
+              </p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

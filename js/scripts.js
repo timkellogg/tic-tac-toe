@@ -50,11 +50,6 @@ Player.prototype.win = function() {
  return win;
 };
 
-// prevent overriding of turn
-
-// end game on win
-
-// instructions modal
 
 // cats game
 
@@ -64,31 +59,40 @@ $(document).ready(function() {
   var playerTurn = player1;
   var turns = 0;
 
+  function renderMsgs() {
+    $(".result").show();
+    $('.turn').hide();
+  }
+
+  function renderRestartBtn() {
+    $('#msg-container').append("<button id='restart' class='btn btn-default'>Play again?</button>");
+    $('#restart').on("click", function() {
+      location.reload();
+    });
+  }
+
   $('.turn').text("Player " + playerTurn.mark + "'s Turn");
   $(".cell-value").click(function() {
-    if ($(this).text() === "") {
+    if ( $(this).text() === "" ) {
       $(this).text(playerTurn.mark);
-
-      var spaceId = parseInt($(this).attr('id'));
+      var spaceId = parseInt( $(this).attr('id') );
       playerTurn.move(spaceId);
       turns++;
       if (playerTurn.win() === true) {
         $('span#winner').text('Player ' + playerTurn.mark + ' wins!')
-        $('#msg-container').append("<button id='restart' class='btn btn-default'>Play again?</button>");
-        $('#restart').on("click", function() { location.reload(); });
-        $(".result").show();
-        $('.turn').hide();
+        renderRestartBtn();
+        renderMsgs();
         $(".cell-value").off();
-      } else if (turns === 9) {  //ends the game after 9 turns if there is no winner
-        $('span#winner').text('Game over. You both suck!')
-        $(".result").show();
-        $('.turn').hide();
+      } else if (turns === 9) {
+        $('span#winner').text('Game over. Fight to the DEATH (or restart)!')
+        renderMsgs();
+        renderRestartBtn();
       } else {
         playerTurn = playerTurn === player1 ? player2 : player1;
-        $('.turn').text("Player " + playerTurn.mark + "'s Turn"); //switches player turn
+        $('.turn').text("Player " + playerTurn.mark + "'s Turn");
       };
     } else {
-      $('#cheaterModal').modal('show')
+      $('#cheaterModal').modal('show');
     }
   });
 
