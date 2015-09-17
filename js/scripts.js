@@ -57,6 +57,7 @@ $(document).ready(function() {
   var player1 = new Player("X");
   var player2 = new Player("O");
   var playerTurn = player1;
+  changeCursor();
   var turns = 0;
 
 
@@ -81,6 +82,18 @@ $(document).ready(function() {
     });
   }
 
+  function changeCursor() {
+    if (turns % 2 === 0 || turns === undefined) {
+      $(".tic-tac-toe-table").removeClass("o-cursor").addClass("x-cursor");
+    } else {
+      $(".tic-tac-toe-table").removeClass("x-cursor").addClass("o-cursor");
+    }
+  }
+
+  function endCursor() {
+    $(".tic-tac-toe-table").css("cursor", "pointer");
+  }
+
   $('.turn').text("Player " + playerTurn.mark + "'s Turn");
   $(".cell-value").click(function() {
     if ( $(this).text() === "" ) {
@@ -88,16 +101,19 @@ $(document).ready(function() {
       var spaceId = parseInt( $(this).attr('id') );
       playerTurn.move(spaceId);
       turns++;
+      changeCursor();
       if (playerTurn.win() === true) {
         $('span#winner').text('Congrats!' + " " + 'Player ' + playerTurn.mark + ' wins!');
         renderRestartBtn();
         renderMsgs();
+        endCursor()
         $(".cell-value").off();
       } else if (turns === 9) {
         $('span#winner').text('Game over. Fight to the DEATH (or restart)!')
         renderCat();
         renderMsgs();
         renderRestartBtn();
+        endCursor()
       } else {
         playerTurn = playerTurn === player1 ? player2 : player1;
         $('.turn').text("Player " + playerTurn.mark + "'s Turn");

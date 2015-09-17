@@ -22,8 +22,16 @@ body {
   border: 3px solid black;
 }
 
-.cell-value:hover {
+/*.cell-value:hover {
   cursor:pointer;
+}*/
+
+.x-cursor {
+  cursor: url("../public/x-cursor.png") 25 25, pointer;
+}
+
+.o-cursor {
+  cursor: url("../public/o-cursor.png") 25 25, pointer;
 }
 
 .tic-tac-toe-table,
