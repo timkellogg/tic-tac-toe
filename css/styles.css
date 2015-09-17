@@ -4,6 +4,7 @@ body {
 }
 
 .tic-tac-toe-table {
+  display: none;
   width: 50%;
 }
 
@@ -50,4 +51,9 @@ body {
 
 #instructions-container {
   padding: 10px;
+}
+
+.play-options {
+  margin: auto;
+  margin-top: 50px;
 }

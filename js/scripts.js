@@ -60,7 +60,22 @@ $(document).ready(function() {
   var availableSpaces = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   changeCursor();
   var turns = 0;
+  var computer;
 
+  $(".option-btn").on("click", function() {
+    $(".play-options").hide();
+    $(".tic-tac-toe-table").fadeIn(500);
+  });
+
+  // set the player vs player
+  $("#PVP").on("click", function() {
+    computer = false;
+  });
+
+  // set player vs computer
+  $("#PVC").on("click", function() {
+    computer = true;
+  });
 
   function renderMsgs() {
     $(".result").show();
@@ -146,7 +161,8 @@ $(document).ready(function() {
       } else {
         playerTurn = playerTurn === player1 ? player2 : player1;
         $('.turn').text("Player " + playerTurn.mark + "'s Turn");
-        computerPick();
+        console.log(computer);
+        if (computer) computerPick();
       };
     } else {
       $('#cheaterModal').modal('show');
