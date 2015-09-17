@@ -51,7 +51,6 @@ Player.prototype.win = function() {
 };
 
 
-// reset button
 
 // end game on win
 
@@ -78,6 +77,7 @@ $(document).ready(function() {
       $('#restart').on("click", function() { location.reload(); });
       $(".result").show();
       $('.turn').hide();
+      $(".cell-value").off();
     } else if (turns === 9) {  //ends the game after 9 turns if there is no winner
       $('span#winner').text('Game over. You both suck!')
       $(".result").show();
@@ -87,7 +87,7 @@ $(document).ready(function() {
       $('.turn').text("Player " + playerTurn.mark + "'s Turn"); //switches player turn
     };
 
-    $(this).unbind("click");  //makes clicked cell unclickable
+    // $(this).unbind("click");  //makes clicked cell unclickable
   });
 
 });
