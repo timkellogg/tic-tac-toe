@@ -51,12 +51,13 @@ Player.prototype.win = function() {
 };
 
 
-// cats game
-
 $(document).ready(function() {
   var player1 = new Player("X");
   var player2 = new Player("O");
   var playerTurn = player1;
+  var player1Spaces = [];
+  var player2Spaces = [];
+  var availableSpaces = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   changeCursor();
   var turns = 0;
 
@@ -94,12 +95,24 @@ $(document).ready(function() {
     $(".tic-tac-toe-table").css("cursor", "pointer");
   }
 
+  // function computerPick() {
+  //   var selection = availableSpaces[Math.floor(Math.random()*availableSpaces.length)];
+  //   $("#" + selection).text(player2.mark);
+  //   playerTurn.move(selection);
+  //   var index = availableSpaces.indexOf(selection);
+  //   availableSpaces.splice(index, 1);
+  //   turns++;
+  //   changeCursor();
+  // }
+
   $('.turn').text("Player " + playerTurn.mark + "'s Turn");
   $(".cell-value").click(function() {
     if ( $(this).text() === "" ) {
       $(this).text(playerTurn.mark);
       var spaceId = parseInt( $(this).attr('id') );
       playerTurn.move(spaceId);
+      // var index = availableSpaces.indexOf(spaceId);
+      // availableSpaces.splice(index, 1);
       turns++;
       changeCursor();
       if (playerTurn.win() === true) {
@@ -109,7 +122,7 @@ $(document).ready(function() {
         endCursor()
         $(".cell-value").off();
       } else if (turns === 9) {
-        $('span#winner').text('Game over. Fight to the DEATH (or restart)!')
+        $('span#winner').text('Game over. Fight to the DEATH (or play again)!')
         renderCat();
         renderMsgs();
         renderRestartBtn();
@@ -118,6 +131,7 @@ $(document).ready(function() {
         playerTurn = playerTurn === player1 ? player2 : player1;
         $('.turn').text("Player " + playerTurn.mark + "'s Turn");
       };
+    // computerPick();
     } else {
       $('#cheaterModal').modal('show');
     }
