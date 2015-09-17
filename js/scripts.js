@@ -50,7 +50,7 @@ Player.prototype.win = function() {
  return win;
 };
 
-
+// prevent overriding of turn
 
 // end game on win
 
@@ -66,28 +66,30 @@ $(document).ready(function() {
 
   $('.turn').text("Player " + playerTurn.mark + "'s Turn");
   $(".cell-value").click(function() {
-    $(this).text(playerTurn.mark);
+    if ($(this).text() === "") {
+      $(this).text(playerTurn.mark);
 
-    var spaceId = parseInt($(this).attr('id'));
-    playerTurn.move(spaceId);
-    turns++;
-    if (playerTurn.win() === true) {
-      $('span#winner').text('Player ' + playerTurn.mark + ' wins!')
-      $('#msg-container').append("<button id='restart' class='btn btn-default'>Play again?</button>");
-      $('#restart').on("click", function() { location.reload(); });
-      $(".result").show();
-      $('.turn').hide();
-      $(".cell-value").off();
-    } else if (turns === 9) {  //ends the game after 9 turns if there is no winner
-      $('span#winner').text('Game over. You both suck!')
-      $(".result").show();
-      $('.turn').hide();
+      var spaceId = parseInt($(this).attr('id'));
+      playerTurn.move(spaceId);
+      turns++;
+      if (playerTurn.win() === true) {
+        $('span#winner').text('Player ' + playerTurn.mark + ' wins!')
+        $('#msg-container').append("<button id='restart' class='btn btn-default'>Play again?</button>");
+        $('#restart').on("click", function() { location.reload(); });
+        $(".result").show();
+        $('.turn').hide();
+        $(".cell-value").off();
+      } else if (turns === 9) {  //ends the game after 9 turns if there is no winner
+        $('span#winner').text('Game over. You both suck!')
+        $(".result").show();
+        $('.turn').hide();
+      } else {
+        playerTurn = playerTurn === player1 ? player2 : player1;
+        $('.turn').text("Player " + playerTurn.mark + "'s Turn"); //switches player turn
+      };
     } else {
-      playerTurn = playerTurn === player1 ? player2 : player1;
-      $('.turn').text("Player " + playerTurn.mark + "'s Turn"); //switches player turn
-    };
-
-    // $(this).unbind("click");  //makes clicked cell unclickable
+      $('#cheaterModal').modal('show')
+    }
   });
 
 });
