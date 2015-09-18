@@ -3,7 +3,7 @@ body {
   font-family: 'Gloria Hallelujah', cursive;
 }
 
-.tic-tac-toe-table {
+#game-table {
   display: none;
   width: 50%;
 }
@@ -35,7 +35,7 @@ body {
   cursor: url("../public/o-cursor.png") 25 25, pointer;
 }
 
-.tic-tac-toe-table,
+#game-table,
 .result {
   margin: 0 auto;
   text-align: center;
@@ -71,6 +71,23 @@ body {
   background-color: #628CA1;
 }
 
-.pick-name {
+#pick-name {
   display: none;
 }
+
+.custom-input {
+  text-align: center;
+  margin: 20px auto;
+  width: 50%;
+}
+
+.custom-input:focus {
+  background-color: lightyellow;
+}
+
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder           { color:transparent; } 
+input:focus::-moz-placeholder          { color:transparent; }
+input:focus:-ms-input-placeholder      { color:transparent; } 
+
+

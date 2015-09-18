@@ -35,10 +35,10 @@ Player.prototype.move = function(move) {
 };
 
 Player.prototype.win = function() {
-  var result = [];
-  var winningCombos = [[1, 2, 3], [4, 5, 6,], [7, 8, 9], [1, 4, 7], [2, 5 ,8], [3, 6, 9], [1, 5, 9], [3, 5, 7]];
-  var win =  false;
-  var spaces = this.spaces
+  var result = [],
+      winningCombos = [[1, 2, 3], [4, 5, 6,], [7, 8, 9], [1, 4, 7], [2, 5 ,8], [3, 6, 9], [1, 5, 9], [3, 5, 7]],
+      win =  false,
+      spaces = this.spaces
   winningCombos.forEach(function(combo) {
     for (var i = 0; i <3; i++) {
       result[i] = (spaces).includes(combo[i]); //gets results for each winning combination
@@ -50,43 +50,42 @@ Player.prototype.win = function() {
  return win;
 };
 
-
 $(document).ready(function() {
-  var player1 = new Player("X");
-  var player2 = new Player("O");
-  var playerTurn = player1;
-  var availableSpaces = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  var availableSpaces = [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      player1 = new Player("X"),
+      player2 = new Player("O"),
+      playerTurn = player1,
+      turns = 0,
+      computer,
+      player1Name,
+      player2Name,
+      currentPlayer;
+    
   changeCursor();
-  var turns = 0;
-  var computer;
-  var player1Name;
-  var player2Name;
-  var currentPlayer;
 
   $("#PVP").on("click", function() {
     $(".play-options").hide();
-    $(".pick-name").fadeIn(500);
+    $("#pick-name").fadeIn(500);
+    computer = false;
   });
 
   $("#PVC").on("click", function() {
     $(".play-options").hide();
-    $(".tic-tac-toe-table").fadeIn(500);
+    $("#game-table").fadeIn(500);
+    computer = true;
   });
 
   $("#player-names").on("click", function() {
-    if (($("input#player1")).val() !== "" && ($("input#player2")).val() !== "") {
-      $(".pick-name").hide();
-      $(".tic-tac-toe-table").fadeIn(500);
-      player1Name = $("input#player1").val();
-      player2Name = $("input#player2").val();
+    player1Name = $("#player1").val()  
+    player2Name = $("#player2").val() 
+    if (player1Name && player2Name) {
+      $("#pick-name").hide();
+      $("#game-table").fadeIn(500);
       $('.turn').text(player1Name + "'s Turn");
     } else {
       $('#noNameModal').modal('show');
     }
   });
-
-  $("#PVP").on("click", function() { computer = false; });
-  $("#PVC").on("click", function() { computer = true;  });
 
   function renderMsgs() {
     $(".result").show();
@@ -94,8 +93,8 @@ $(document).ready(function() {
   }
 
   function renderCat() {
-    $(".tic-tac-toe-table").empty();
-    $(".tic-tac-toe-table").append(
+    $("#game-table").empty();
+    $("#game-table").append(
         "<div id='cat-container'>" +
           "<img class='img-rounded' src='public/gladiator-cat.jpg'>" +
         "</div>"
@@ -111,14 +110,29 @@ $(document).ready(function() {
 
   function changeCursor() {
     if (turns % 2 === 0 || turns === undefined) {
-      $(".tic-tac-toe-table").removeClass("o-cursor").addClass("x-cursor");
+      $("#game-table").removeClass("o-cursor").addClass("x-cursor");
     } else {
-      $(".tic-tac-toe-table").removeClass("x-cursor").addClass("o-cursor");
+      $("#game-table").removeClass("x-cursor").addClass("o-cursor");
     }
   }
 
   function endCursor() {
-    $(".tic-tac-toe-table").css("cursor", "pointer");
+    $("#game-table").css("cursor", "pointer");
+  }
+
+  function renderWinGame() {
+    renderRestartBtn();
+    renderMsgs();
+    endCursor()
+    $(".cell-value").off();
+  }
+
+  function tieGame() {
+    $('span#winner').text('Game over. Fight to the DEATH (or play again)!')
+    renderCat();
+    renderMsgs();
+    renderRestartBtn();
+    endCursor()
   }
 
   function computerPick() {
@@ -130,23 +144,15 @@ $(document).ready(function() {
     turns++;
     changeCursor();
     if (playerTurn.win() === true) {
-      $('span#winner').text('Congrats!' + " " + 'Player ' + playerTurn.mark + ' wins!');
-      renderRestartBtn();
-      renderMsgs();
-      endCursor()
-      $(".cell-value").off();
+      $('span#winner').text('Congrats! Player ' + playerTurn.mark + ' wins!');
+      renderWinGame()
     } else if (turns === 9) {
-      $('span#winner').text('Game over. Fight to the DEATH (or play again)!')
-      renderCat();
-      renderMsgs();
-      renderRestartBtn();
-      endCursor()
+      tieGame();
     } else {
       playerTurn = playerTurn === player1 ? player2 : player1;
       $('.turn').text("Player " + playerTurn.mark + "'s Turn");
     };
   }
-
 
   $(".cell-value").click(function() {
     if ( $(this).text() === "" ) {
@@ -155,25 +161,18 @@ $(document).ready(function() {
       playerTurn.move(spaceId);
       var index = availableSpaces.indexOf(spaceId);
       availableSpaces.splice(index, 1);
-      if (playerTurn.mark === "X") {
-        currentPlayer = player1Name;
-      } else {
-        currentPlayer = player2Name;
+      if (playerTurn.mark === "X") { 
+        currentPlayer = player1Name; 
+      } else { 
+        currentPlayer = player2Name; 
       }
       turns++;
       changeCursor();
       if (playerTurn.win() === true) {
         $('span#winner').text('Congrats! ' + currentPlayer + ' wins!');
-        renderRestartBtn();
-        renderMsgs();
-        endCursor()
-        $(".cell-value").off();
+        renderWinGame()
       } else if (turns === 9) {
-        $('span#winner').text('Game over. Fight to the DEATH (or play again)!')
-        renderCat();
-        renderMsgs();
-        renderRestartBtn();
-        endCursor()
+        tieGame();
       } else {
         playerTurn = playerTurn === player1 ? player2 : player1;
         $('.turn').text(currentPlayer + "'s Turn");
@@ -183,5 +182,4 @@ $(document).ready(function() {
       $('#cheaterModal').modal('show');
     }
   });
-
 });

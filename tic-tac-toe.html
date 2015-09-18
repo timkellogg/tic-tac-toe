@@ -15,19 +15,17 @@
         <button class="btn btn-default" data-toggle="modal" data-target="#instructions-modal">View Instructions</button>
       </div>
       <h1 class="text-center">Tic Tac Toe ! ! !</h1>
-      <div class="play-options row text-center">
-        <button id="PVP" class="option-btn btn btn-info btn-lg">Play against a friend!</button>
-        <button id="PVC" class="option-btn btn btn-success btn-lg">Play against the computer!</button>
+
+      <div class="play-options well row text-center">
+        <button id="PVP" type="button" class="option-btn btn btn-info btn-lg">Play against a friend!</button>
+        <button id="PVC" type="button" class="option-btn btn btn-success btn-lg">Play against the computer!</button>
       </div>
-      <div class="pick-name text-center">
-        <input id="player1" type="text" class="form-control" placeholder="Enter Player One's Name!" required>
-        <br>
-        <input id="player2" type="text" class="form-control" placeholder="Enter Player Two's Name!" required>
-        <br>
+      <div id="pick-name" class="text-center well">
+        <input id="player1" type="text" class="form-control custom-input" placeholder="Player 1 Name">
+        <input id="player2" type="text" class="form-control custom-input" placeholder="Player 2 Name">
         <button id="player-names" class="name-btn btn btn-start btn-lg">Start the Game!</button>
       </div>
-      <div class="tic-tac-toe-table">
-
+      <div id="game-table">
         <table id="board" class="table table-bordered">
           <tr>
             <td class='cell-value' id="1"></td>
@@ -61,7 +59,7 @@
               <h4 class="modal-title text-center" id="myModalLabel">CHEATER!</h4>
             </div>
             <div class="modal-body">
-              Don't cheat - pick a different square...
+              <p>Don't cheat - pick a different square...</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -103,9 +101,7 @@
               <h4 class="modal-title" id="myModalLabel">Uh oh...</h4>
             </div>
             <div class="modal-body">
-              <p>
-                Please enter a name for <u>both</u> players.
-              </p>
+              <p> Please enter a name for <u>both</u> players.</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
