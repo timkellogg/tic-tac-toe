@@ -135,7 +135,7 @@ $(document).ready(function() {
     endCursor()
   }
 
-  function computerPick() {
+  var computerPick = function() {
     var selection = availableSpaces[Math.floor(Math.random()*availableSpaces.length)];
     $("#" + selection).text(playerTurn.mark);
     playerTurn.move(selection);
@@ -144,7 +144,7 @@ $(document).ready(function() {
     turns++;
     changeCursor();
     if (playerTurn.win() === true) {
-      $('span#winner').text('Congrats! Player ' + playerTurn.mark + ' wins!');
+      $('span#winner').text('Sorry! Computer wins!');
       renderWinGame()
     } else if (turns === 9) {
       tieGame();
@@ -169,14 +169,18 @@ $(document).ready(function() {
       turns++;
       changeCursor();
       if (playerTurn.win() === true) {
-        $('span#winner').text('Congrats! ' + currentPlayer + ' wins!');
+        if (computer) { currentPlayer === "You"; }
+        $('span#winner').text('Congrats! ' + currentPlayer + ' won!');
         renderWinGame()
       } else if (turns === 9) {
         tieGame();
       } else {
         playerTurn = playerTurn === player1 ? player2 : player1;
         $('.turn').text(currentPlayer + "'s Turn");
-        if (computer) computerPick();
+        if (computer) { 
+          setTimeout(computerPick, 500); 
+          endCursor();
+        }
       };
     } else {
       $('#cheaterModal').modal('show');
