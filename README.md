@@ -2,7 +2,7 @@
 
 ##### Game of Tic Tac Toe, 09/16/2015
 
-#### By Aileen Cacayorin & Janice Laset-Parkerson
+#### By Tim Kellogg, Alexa Z., Aileen Cacayorin & Janice Laset-Parkerson
 
 ## Description
 
